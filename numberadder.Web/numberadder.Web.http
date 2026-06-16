@@ -1,0 +1,6 @@
+@numberadder.Web_HostAddress = http://localhost:5252
+
+GET {{numberadder.Web_HostAddress}}/weatherforecast/
+Accept: application/json
+
+###
