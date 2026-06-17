@@ -14,7 +14,7 @@ state = {
   };
 onLockClick=(n)=>{
 const lockedNumbers= [...this.state.lockedNumbers]
-const islocked=lockedNumbers.some(snumber=>snumber.id===n.id)
+const islocked=lockedNumbers.some(snumber=>snumber.id==n.id)
 if(islocked){
   this.setState({lockedNumbers:lockedNumbers.filter(item=>item.id!==n.id)})
 }
@@ -25,14 +25,13 @@ this.setState({lockedNumbers:lockedNumbers})
 }
 onaddClick = e=>{
     this.setState({ currentnumber:{number: Math.floor(Math.random() * 1000),id:uuid4()}})
-console.log(this.state.currentnumber)
 const copy = [...this.state.numbers, this.state.currentnumber];
 this.setState({ numbers: copy })
 }
 onSelectClick=(n)=> {
   
   const selectedNumbers = [...this.state.selectedNumbers]
-  const exisits = selectedNumbers.some(snumber=>snumber.id===n.id)
+  const exisits = selectedNumbers.some(snumber=>snumber.id==n.id)
   if(exisits){
     
     this.setState({selectedNumbers:selectedNumbers.filter(item=>item.id!==n.id)})
@@ -65,8 +64,8 @@ render() {
           {this.state.numbers.map((n)=> <NumberDisplay
             key={n.id} number={n.number}
             onSelectClick={()=>this.onSelectClick(n)}
-           isSelected = {this.state.selectedNumbers.some(snumber=>snumber.id===n.id)}
-           islocked = {this.state.lockedNumbers.some(lnumber=>lnumber.id===n.id)}
+           isSelected = {this.state.selectedNumbers.some(snumber=>snumber.id==n.id)}
+           islocked = {this.state.lockedNumbers.some(lnumber=>lnumber.id==n.id)}
             />
           )}
 
@@ -75,13 +74,13 @@ render() {
     </table>
 
  <div className="row p-5 rounded" style={{backgroundcolor:" rgb(233, 236, 239)"}}>
-  <div className="col-md-6 col-md-offset-3"><h3>Selected Numbers </h3>
+  <div className="col-md-6 col-md-offset-3"><h3>{!!this.state.selectedNumbers.length && "Selected Numbers"} </h3>
   <ul className="list-group">
 
     {this.state.selectedNumbers.map((n)=> <SelectedNumbersDisplay
     key= {n.id} number = {n.number}
     onLockClick = {()=>this.onLockClick(n)}
-    islocked={this.state.lockedNumbers.some(snumber=>snumber.id===n.id)}
+    islocked={this.state.lockedNumbers.some(snumber=>snumber.id==n.id)}
   />
   )}
   
